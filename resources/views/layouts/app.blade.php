@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <title>@yield('title')</title>
+</head>
+
+<body class="min-h-screen flex flex-col bg-gray-50 text-gray-900">
+
+    @include('layouts.header')
+
+    <main class="flex-1">
+        @yield('content')
+    </main>
+
+    @include('layouts.footer')
+
+</body>
+
+</html>
