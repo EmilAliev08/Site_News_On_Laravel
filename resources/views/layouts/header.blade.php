@@ -25,6 +25,30 @@
                 </a>
             </nav>
 
+            @guest
+                <div class="flex gap-3">
+                    <a href="/login"
+                    class="text-gray-600 hover:text-gray-900">
+                        Войти
+                    </a>
+
+                    <a href="/register"
+                    class="text-gray-600 hover:text-gray-900">
+                        Зарегистрироваться
+                    </a>
+                </div>
+            @endguest
+
+            @auth
+                <form method="POST" action="/logout">
+                    @csrf
+                    <button type="submit"
+                            class="text-gray-600 hover:text-gray-900">
+                        Выйти
+                    </button>
+                </form>
+            @endauth
+
         </div>
 
     </div>
