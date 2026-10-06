@@ -19,16 +19,14 @@ Route::post('/news', [SiteController::class, 'store']);
 
 Route::get('/catalog/{category}', [SiteController::class, 'catalogCategory']);
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
+//Registration
+Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
 
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::post('/logout', [LoginController::class, 'logout']);
-
+//Authorization
 Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+
+Route::post('/logout', [LoginController::class, 'logout']);
