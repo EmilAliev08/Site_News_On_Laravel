@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\News;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class SiteController extends Controller
 {
@@ -16,7 +17,9 @@ class SiteController extends Controller
     }
 
     public function journalist(){
-        return view('journalist');
+        $categories = Category::all();
+
+        return view('journalist', compact('categories'));   
     }
 
     public function admin(){
@@ -34,21 +37,37 @@ class SiteController extends Controller
     //Create news
     public function store(Request $request)
     {
-        $title = $request->input('title');
-        $content = $request->input('content');
-        $category = $request->input('category');
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id',
+        ]);
 
         $news = News::create([
-            'title' => $title,
-            'content' => $content,
-            'category' => $category,
+            'title' => $validated['title'],
+            'content' => $validated['content'],
         ]);
-        return redirect('news/'.$news->id );
+
+        $news->categories()->sync($validated['categories']);
+
+        return redirect('news/' . $news->id);
     }
 
     public function catalogCategory($category)
     {
-       $news = News::where('category', $category)->get();
+        $categories = [
+            'technology' => 'Технологии',
+            'programming' => 'Программирование',
+            'science' => 'Наука',
+            'sport' => 'Спорт',
+            'world' => 'Мир',
+            'economy' => 'Экономика',
+        ];
+
+        $categoryModel = Category::where('name', $categories[$category])->first();
+
+        $news = $categoryModel->news;
 
         return view('catalogCategory', compact('news'));
     }

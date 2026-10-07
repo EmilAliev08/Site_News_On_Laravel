@@ -2,7 +2,7 @@
 
     <article class="h-full bg-white rounded-2xl border border-gray-200 p-6 hover:-translate-y-1 transition flex flex-col">
 
-        <h2 class="text-xl font-semibold mt-2 mb-3">
+        <h2 class="text-xl font-semibold mt-2 mb-3 line-clamp-2">
             {{ $item->title }}
         </h2>
 

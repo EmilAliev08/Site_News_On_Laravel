@@ -26,24 +26,25 @@
                 >
             </div>
             
-
             <div>
-                <label class="block text-sm font-medium mb-2">
-                    Категория
+                <label class="block text-sm font-medium mb-3">
+                    Категории
                 </label>
 
-                <select
-                    name="category"
-                    class="w-full border border-gray-300 rounded-lg px-4 py-3
-                           focus:outline-none focus:ring-2 focus:ring-gray-900"
-                >
-                    <option value="technology">Технологии</option>
-                    <option value="programming">Программирование</option>
-                    <option value="science">Наука</option>
-                    <option value="sport">Спорт</option>
-                    <option value="world">Мир</option>
-                    <option value="economy">Экономика</option>
-                </select>
+                <div class="space-y-2">
+                    @foreach($categories as $category)
+                        <label class="flex items-center gap-2">
+                            <input
+                                type="checkbox"
+                                name="categories[]"
+                                value="{{ $category->id }}"
+                                class="rounded border-gray-300"
+                            >
+
+                            <span>{{ $category->name }}</span>
+                        </label>
+                    @endforeach
+                </div>
             </div>
             
             <div>
