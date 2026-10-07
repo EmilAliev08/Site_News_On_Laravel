@@ -9,9 +9,13 @@ Route::get('/', [SiteController::class, 'main']);
 
 Route::get('/catalog', [SiteController::class, 'catalog']);
 
-Route::get('/journalist', [SiteController::class, 'journalist']);
+Route::middleware(['auth', 'role:journalist'])->group(function () {
+    Route::get('/journalist', [SiteController::class, 'journalist']);
+});
 
-Route::get('/admin', [SiteController::class, 'admin']);
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin', [SiteController::class, 'admin']);
+});
 
 Route::get('/news/{id}', [SiteController::class, 'show']);
 

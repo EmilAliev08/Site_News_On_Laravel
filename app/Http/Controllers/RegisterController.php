@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use App\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -24,6 +25,9 @@ class RegisterController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
+
+        $role = Role::where('name', 'user')->firstOrFail();
+        $user->roles()->attach($role);
 
         Auth::login($user);
 

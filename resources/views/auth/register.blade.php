@@ -1,41 +1,85 @@
 <!DOCTYPE html>
+
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>Регистрация</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body class="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
 
-    <h1>Регистрация</h1>
-
-    <form method="POST" action="/register">
+    <form
+        method="POST"
+        action="/register"
+        class="bg-white p-8 w-full max-w-md rounded-xl shadow-md"
+    >
 
         @csrf
 
-        <div>
-            <label>Имя</label>
-            <input type="text" name="name">
+        <h1 class="text-3xl font-bold text-center mb-6">
+            Регистрация
+        </h1>
+
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">
+                Имя
+            </label>
+
+            <input
+                type="text"
+                name="name"
+                class="border border-gray-300 rounded-lg w-full px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
         </div>
 
-        <div>
-            <label>Email</label>
-            <input type="email" name="email">
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">
+                Email
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                class="border border-gray-300 rounded-lg w-full px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
         </div>
 
-        <div>
-            <label>Пароль</label>
-            <input type="password" name="password">
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">
+                Пароль
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                class="border border-gray-300 rounded-lg w-full px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
         </div>
 
-        <div>
-            <label>Подтверждение пароля</label>
-            <input type="password" name="password_confirmation">
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">
+                Подтверждение пароля
+            </label>
+
+            <input
+                type="password"
+                name="password_confirmation"
+                class="border border-gray-300 rounded-lg w-full px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
         </div>
 
-        <button type="submit">Зарегистрироваться</button>
+        <button
+            type="submit"
+            class="w-full bg-blue-600 text-white py-2 rounded-lg mt-4 hover:bg-blue-700 transition"
+        >
+            Зарегистрироваться
+        </button>
 
     </form>
 
 </body>
+
 </html>
