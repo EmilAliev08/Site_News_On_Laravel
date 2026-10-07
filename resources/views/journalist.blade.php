@@ -12,6 +12,16 @@
 
         <form action="/news" method="POST" class="bg-white border border-gray-200 rounded-2xl p-8 space-y-6">
             @csrf
+
+            @if ($errors->any())
+                <div class="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+                    <ul class="list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div>
                 <label class="block text-sm font-medium mb-2">
                     Заголовок
@@ -20,6 +30,7 @@
                 <input
                     type="text"
                     name="title"
+                    value="{{ old('title') }}"
                     placeholder="Введите заголовок статьи"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3
                            focus:outline-none focus:ring-2 focus:ring-gray-900"
@@ -58,7 +69,7 @@
                     placeholder="Введите текст статьи"
                     class="w-full border border-gray-300 rounded-lg px-4 py-3
                            focus:outline-none focus:ring-2 focus:ring-gray-900"
-                ></textarea>
+                >{{ old('content') }}</textarea>
             </div>
 
             <button

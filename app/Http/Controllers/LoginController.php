@@ -22,7 +22,7 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Предоставленные учетные данные не соответствуют нашим записям.',
+            'email' => 'Неверный логин или пароль',
         ])->onlyInput('email');
     }
 
