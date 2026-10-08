@@ -15,6 +15,8 @@ Route::middleware(['auth', 'role:journalist'])->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin', [SiteController::class, 'admin']);
+    Route::get('/admin/users', [SiteController::class, 'users']);
+    Route::post('/admin/users/{user}/roles', [SiteController::class, 'updateRoles']);   
 });
 
 Route::get('/news/{id}', [SiteController::class, 'show']);

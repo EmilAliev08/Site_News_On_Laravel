@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\User;
+use App\Models\Role;
 
 class SiteController extends Controller
 {
@@ -70,6 +72,36 @@ class SiteController extends Controller
         $news = $categoryModel->news;
 
         return view('catalogCategory', compact('news'));
+    }
+
+
+    //Admin
+
+    public function users()
+    {
+        $users = User::with('roles')->get();
+        $roles = Role::whereIn('name', ['journalist', 'admin'])->get();
+
+        return view('admin.users', compact('users', 'roles'));
+    }
+
+    public function updateRoles(Request $request, User $user)
+    {
+        if ($user->id === $request->user()->id) {
+            return back()->with(
+                'error',
+                'Вы не можете изменять собственные роли.'
+            );
+        }
+
+        $validated = $request->validate([
+            'roles' => ['array'],
+            'roles.*' => ['exists:roles,id'],
+        ]);
+
+        $user->roles()->sync($validated['roles'] ?? []);
+
+        return back()->with('success', 'Роли пользователя обновлены.');
     }
 }
 
